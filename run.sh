@@ -1,4 +1,4 @@
 #!/bin/sh
 
-ls *.js | entr -cr ./build.sh &
+find src -iname '*.js' | entr -cr ./build.sh &
 serve public
