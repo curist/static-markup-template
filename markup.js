@@ -38,8 +38,14 @@ function markup(tags, indent = 0, context = {}) {
     attrs = {}
   }
 
+  const childrenArr = !children ? []
+    : Array.isArray(children) ? children : [children]
+
   if(typeof tag === 'function') {
-    return markup(tag({ ...attrs, children }), indent, context)
+    return markup(tag({
+      ...attrs,
+      children: childrenArr,
+    }), indent, context)
   }
 
   context.fns = context.fns || {}
@@ -79,9 +85,6 @@ function markup(tags, indent = 0, context = {}) {
   }
 
   result += repeat(indent) + `<${tag}${attrsRendered}>`
-
-  const childrenArr = !children ? []
-    : Array.isArray(children) ? children : [children]
 
   // if has only one text content chlidren or no children,
   // we don't linebreak
