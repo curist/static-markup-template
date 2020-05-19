@@ -1,6 +1,6 @@
-import Layout from './components/Layout.js'
-import MyForm from './components/MyForm.js'
-import MyComponent from './components/MyComponent.js'
+import Layout from '../components/Layout.js'
+import MyForm from '../components/MyForm.js'
+import MyComponent from '../components/MyComponent.js'
 
 const App = () => ['html', [
   ['head', [
