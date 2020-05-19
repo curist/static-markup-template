@@ -6,8 +6,13 @@ const Layout = ({ children }) => ['div', {
 
 const MyComponent = ({ count = 0 }) => ['span', {
   class: 'my-component',
-  onclick: function() {
-    console.log('clicked')
+  style: `
+    cursor: pointer;
+  `,
+  onclick: function(el) {
+    const count = (parseInt(el.dataset.value) || 0) + 1
+    el.dataset.value = count
+    el.innerHTML = 'The count is: ' + count
   },
 }, 'The count is: ' + count]
 
@@ -25,6 +30,10 @@ const MyApp = () => ['html', [
     ['style', `
       .my-component {
         color: navy;
+        transition: all 1s ease;
+      }
+      .my-component:hover {
+        color: red;
       }
     `],
     ['title', 'my site'],

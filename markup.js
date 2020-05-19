@@ -2,7 +2,7 @@ const repeat = (n = 0, c = '  ') => {
   return Array.from({ length: n + 1 }).join(c)
 }
 
-const randomFunctionName = () => 'f' + Math.random().toString(16).slice(8)
+const randomFunctionName = () => 'f' + Math.random().toString(16).slice(-6)
 
 const isTextNode = el => {
   const type = typeof el
@@ -52,7 +52,7 @@ function markup(tags, indent = 0) {
       if(typeof v === 'function') {
         const fnName = randomFunctionName()
         fns[fnName] = v.toString()
-        return `${k}="${fnName}()"`
+        return `${k}="${fnName}(this)"`
       }
       return `${k}="${v}"`
     }).join(' ')
