@@ -4,7 +4,9 @@ const Layout = ({ children }) => ['div', {
   class: 'my-layout',
 }, children]
 
-const MyComponent = ({ count = 0 }) => ['span', 'The count is: ' + count]
+const MyComponent = ({ count = 0 }) => ['span', {
+  class: 'my-component',
+}, 'The count is: ' + count]
 
 const MyApp = () => ['html', [
   ['head', [
@@ -12,14 +14,20 @@ const MyApp = () => ['html', [
       rel: 'icon',
       href: '/favicon.ico',
     }],
+    ['link', {
+      rel: 'stylesheet',
+      href: 'https://unpkg.com/sakura.css/css/sakura.css',
+      type: 'text/css',
+    }],
     ['style', `
       .my-component {
-        color: black;
+        color: navy;
       }
     `],
     ['title', 'my site'],
   ]],
   ['body', [
+    ['h1', 'Hello world!'],
     [Layout, [
       'text', 'bar',
       ['div', 'foo'],
