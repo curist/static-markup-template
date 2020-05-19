@@ -23,9 +23,9 @@ const selfClosingTag = new Set([
 //   [tag, []]
 //   [tag, {}, '']
 //   [tag, {}, []]
-function markup(tags, indent = 0) {
+function markup(tags, indent = 0, context = {}) {
   if(typeof tags === 'function') {
-    return markup([tags], indent)
+    return markup([tags], indent, context)
   }
 
   let [tag, attrs, children] = tags
@@ -42,16 +42,22 @@ function markup(tags, indent = 0) {
     : Array.isArray(children) ? children : [children]
 
   if(typeof tag === 'function') {
-    return markup(tag({ ...attrs, children }), indent)
+    return markup(tag({ ...attrs, children }), indent, context)
   }
 
+  context.fns = context.fns || {}
   const fns = {}
+
   const attrPairs = Object.entries(attrs)
   const attrsRendered = attrPairs.length === 0 ? '' :
     ' ' + attrPairs.map(([k, v]) => {
       if(typeof v === 'function') {
-        const fnName = randomFunctionName()
-        fns[fnName] = v.toString()
+        const fnString = v.toString()
+        const existingFnName = context.fns[fnString]
+        const fnName = existingFnName || randomFunctionName()
+        if(!existingFnName) {
+          fns[fnString] = fnName
+        }
         return `${k}="${fnName}(this)"`
       }
       return `${k}="${v}"`
@@ -62,10 +68,14 @@ function markup(tags, indent = 0) {
   const fnPairs = Object.entries(fns)
   if(fnPairs.length > 0) {
     result += repeat(indent) + '<script>\n'
-    fnPairs.forEach(([k, v]) => {
-      result += repeat(indent + 1) + `var ${k} = ${v.toString()};\n`
+    fnPairs.forEach(([fnBody, fnName]) => {
+      result += repeat(indent + 1) + `var ${fnName} = ${fnBody};\n`
     })
     result += repeat(indent) + '</script>\n'
+    context.fns = {
+      ...context.fns,
+      ...fns,
+    }
   }
 
   result += repeat(indent) + `<${tag}${attrsRendered}>`
@@ -89,7 +99,7 @@ function markup(tags, indent = 0) {
       }
       result += child
     } else {
-      result += markup(child, indent + 1)
+      result += markup(child, indent + 1, context)
     }
     if(shouldLinebreak) {
       result += '\n'

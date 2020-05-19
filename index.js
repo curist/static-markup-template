@@ -4,11 +4,9 @@ const Layout = ({ children }) => ['div', {
   class: 'my-layout',
 }, children]
 
-const MyComponent = ({ count = 0 }) => ['span', {
+const MyComponent = ({ count = 0 }) => ['button', {
   class: 'my-component',
-  style: `
-    cursor: pointer;
-  `,
+  'data-value': count,
   onclick: function(el) {
     const count = (parseInt(el.dataset.value) || 0) + 1
     el.dataset.value = count
@@ -24,18 +22,9 @@ const MyApp = () => ['html', [
     }],
     ['link', {
       rel: 'stylesheet',
-      href: 'https://unpkg.com/sakura.css/css/sakura.css',
-      type: 'text/css',
+      // href: 'https://unpkg.com/sakura.css/css/sakura.css',
+      href: 'https://newcss.net/new.min.css',
     }],
-    ['style', `
-      .my-component {
-        color: navy;
-        transition: all 1s ease;
-      }
-      .my-component:hover {
-        color: red;
-      }
-    `],
     ['title', 'my site'],
   ]],
   ['body', [
