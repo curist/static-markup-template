@@ -7,7 +7,7 @@ const Layout = ({ children }) => ['div', {
 const MyComponent = ({ count = 0 }) => ['button', {
   class: 'my-component',
   'data-value': count,
-  onclick: function(el) {
+  onclick: function(e, el) {
     const count = (parseInt(el.dataset.value) || 0) + 1
     el.dataset.value = count
     el.innerHTML = 'The count is: ' + count
@@ -29,6 +29,20 @@ const MyApp = () => ['html', [
   ]],
   ['body', [
     ['h1', 'Hello world!'],
+    ['form', {
+      onsubmit: (e, el) => {
+        e.preventDefault()
+        const input = el.querySelector('[name=username]')
+        alert(input.value)
+      },
+    }, [
+      ['input', {
+        required: true,
+        name: 'username',
+        placeholder: 'Your name',
+      }],
+      ['input', { type: 'submit' }],
+    ]],
     [Layout, [
       'text', 'bar',
       ['div', 'foo'],

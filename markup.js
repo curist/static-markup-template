@@ -2,7 +2,7 @@ const repeat = (n = 0, c = '  ') => {
   return Array.from({ length: n + 1 }).join(c)
 }
 
-const randomFunctionName = () => 'f' + Math.random().toString(16).slice(-6)
+const randomFunctionName = () => '_' + Math.random().toString(16).slice(-6)
 
 const isTextNode = el => {
   const type = typeof el
@@ -38,9 +38,6 @@ function markup(tags, indent = 0, context = {}) {
     attrs = {}
   }
 
-  const childrenArr = !children ? []
-    : Array.isArray(children) ? children : [children]
-
   if(typeof tag === 'function') {
     return markup(tag({ ...attrs, children }), indent, context)
   }
@@ -51,6 +48,9 @@ function markup(tags, indent = 0, context = {}) {
   const attrPairs = Object.entries(attrs)
   const attrsRendered = attrPairs.length === 0 ? '' :
     ' ' + attrPairs.map(([k, v]) => {
+      if(typeof v === 'boolean' && v) {
+        return k
+      }
       if(typeof v === 'function') {
         const fnString = v.toString()
         const existingFnName = context.fns[fnString]
@@ -58,7 +58,7 @@ function markup(tags, indent = 0, context = {}) {
         if(!existingFnName) {
           fns[fnString] = fnName
         }
-        return `${k}="${fnName}(this)"`
+        return `${k}="${fnName}(event,this)"`
       }
       return `${k}="${v}"`
     }).join(' ')
@@ -79,6 +79,9 @@ function markup(tags, indent = 0, context = {}) {
   }
 
   result += repeat(indent) + `<${tag}${attrsRendered}>`
+
+  const childrenArr = !children ? []
+    : Array.isArray(children) ? children : [children]
 
   // if has only one text content chlidren or no children,
   // we don't linebreak
