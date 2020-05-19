@@ -6,6 +6,9 @@ const Layout = ({ children }) => ['div', {
 
 const MyComponent = ({ count = 0 }) => ['span', {
   class: 'my-component',
+  onclick: function() {
+    console.log('clicked')
+  },
 }, 'The count is: ' + count]
 
 const MyApp = () => ['html', [
@@ -43,6 +46,7 @@ const MyApp = () => ['html', [
     `],
   ]],
 ]]
+
 
 
 console.log(markup(MyApp))
