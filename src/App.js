@@ -1,4 +1,5 @@
 import Layout from './components/Layout.js'
+import MyForm from './components/MyForm.js'
 import MyComponent from './components/MyComponent.js'
 
 const App = () => ['html', [
@@ -16,20 +17,7 @@ const App = () => ['html', [
   ]],
   ['body', [
     ['h1', 'Hello world!'],
-    ['form', {
-      onsubmit: (e, el) => {
-        e.preventDefault()
-        const input = el.querySelector('[name=username]')
-        alert(input.value)
-      },
-    }, [
-      ['input', {
-        required: true,
-        name: 'username',
-        placeholder: 'Your name',
-      }],
-      ['input', { type: 'submit' }],
-    ]],
+    MyForm,
     [Layout, [
       'text', 'bar',
       ['div', 'foo'],
