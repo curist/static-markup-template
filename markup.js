@@ -22,6 +22,9 @@ const selfClosingTag = new Set([
 //   [tag, {}, '']
 //   [tag, {}, []]
 function markup(tags, indent = 0) {
+  if(typeof tags === 'function') {
+    return markup([tags], indent)
+  }
   let [tag, attrs, children] = tags
   if(typeof attrs === 'object' && !Array.isArray(attrs)) {
     // attrs is attrs

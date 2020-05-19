@@ -4,7 +4,7 @@ const Layout = ({ children }) => ['div', {
   class: 'my-layout',
 }, children]
 
-const MyComponent = ({ count }) => ['span', 'The count is: ' + count]
+const MyComponent = ({ count = 0 }) => ['span', 'The count is: ' + count]
 
 const MyApp = () => ['html', [
   ['head', [
@@ -28,6 +28,8 @@ const MyApp = () => ['html', [
       'text content',
     ]],
     [MyComponent, { count: 10 }],
+    'kk',
+    MyComponent,
     ['script', `
       console.log('yoyo!!')
     `],
@@ -35,4 +37,4 @@ const MyApp = () => ['html', [
 ]]
 
 
-console.log(markup([MyApp]))
+console.log(markup(MyApp))
