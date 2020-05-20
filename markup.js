@@ -108,6 +108,7 @@ function markup(tags, indent = 0, context = {}) {
     childrenArr.length === 0
     || childrenArr.length === 1
     && isTextNode(childrenArr[0])
+    && !/\n/.test(childrenArr[0] + '')
   )
 
   if(shouldLinebreak) {
