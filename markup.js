@@ -16,6 +16,11 @@ const selfClosingTag = new Set([
   'meta', 'param', 'source', 'track', 'wbr',
 ])
 
+const loadableTags = new Set([
+  'body', 'frame', 'iframe', 'img',
+  'link', 'script', 'style',
+])
+
 // usage:
 //   [tag]
 //   [tag, {}]
@@ -42,6 +47,7 @@ function markup(tags, indent = 0, context = {}) {
     : Array.isArray(children) ? children : [children]
 
   if(typeof tag === 'function') {
+    // TODO keep the function name info as metadata
     return markup(tag({
       ...attrs,
       children: childrenArr,
@@ -57,17 +63,27 @@ function markup(tags, indent = 0, context = {}) {
       if(typeof v === 'boolean' && v) {
         return k
       }
-      if(typeof v === 'function') {
-        const fnString = v.toString()
-        const existingFnName = context.fns[fnString]
-        const fnName = existingFnName || randomFunctionName()
-        if(!existingFnName) {
-          fns[fnString] = fnName
+      if(k === 'onload' && !loadableTags.has(tag)) {
+        if(!selfClosingTag.has(tag)) {
+          childrenArr.push(['style', { 'data-onload': v }])
         }
-        return `${k}="${fnName}(event,this)"`
+        return null
       }
-      return `${k}="${v}"`
-    }).join(' ')
+      if(typeof v !== 'function') {
+        return `${k}="${v}"`
+      }
+      const fnString = v.toString()
+      const existingFnName = context.fns[fnString]
+      const fnName = existingFnName || randomFunctionName()
+      if(!existingFnName) {
+        fns[fnString] = fnName
+      }
+      if(k === 'data-onload') {
+        return `onload="${fnName}(event,this.parentNode);` +
+          'this.parentNode.removeChild(this)"'
+      }
+      return `${k}="${fnName}(event,this)"`
+    }).filter(v => v).join(' ')
 
   let result = ''
 

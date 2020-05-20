@@ -4,6 +4,10 @@ export default () => [Template, [
   ['h1', 'My Second Page'],
   'and some content',
   ['form', {
+    onload: function(e, el) {
+      console.log(el)
+      console.log('form loaded')
+    },
     onsubmit: function(e, el) {
       e.preventDefault()
       const $input = el.querySelector('[name=code]')
@@ -16,9 +20,6 @@ export default () => [Template, [
       }, 3000)
     },
   }, [
-    ['style', {
-      onload: (e, el) => console.log(e, el.parentNode),
-    }],
     ['input', {
       name: 'code',
       placeholder: 'code',
