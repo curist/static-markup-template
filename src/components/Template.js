@@ -1,13 +1,5 @@
-import { css } from 'linaria'
+import Nav from './Nav'
 
-const body = css`
-  text-transform: uppercase;
-`
-
-const Nav = ['nav', [
-  ['a', { href: '/' }, 'home'],
-  ['a', { href: '/mypage' }, 'a page'],
-]]
 const Template = ({ title = '', children }) => ['html', [
   ['head', [
     ['link', {
@@ -29,7 +21,7 @@ const Template = ({ title = '', children }) => ['html', [
     ['script', { src: '/libs.js' }],
     ['title', title],
   ]],
-  ['body', {class: body}, [
+  ['body', [
     Nav,
     ...children,
     ['div', [
