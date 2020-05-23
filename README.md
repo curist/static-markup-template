@@ -23,3 +23,7 @@ Markups are in the form of either one of the expressions below
 
 `children` should be an array, containing zero or more`markup`s. 
 
+## attrs
+
+`attrs` can have normal [Element.attributes](https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes), only that the event callback functions will always have the signature as `(event, element) => any`, and the `onload` event which is normally only available on selected few tags, can also be used for tags like `div`.
+
