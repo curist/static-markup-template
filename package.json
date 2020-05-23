@@ -2,7 +2,7 @@
   "scripts": {
     "prebuild": "webpack",
     "build": "node build.js",
-    "postbuild": "serve public"
+    "dev": "npm run build && serve public"
   },
   "devDependencies": {
     "babel-loader": "^8.1.0",

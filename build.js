@@ -21,3 +21,5 @@ for(let page of pages) {
 }
 
 sh.cp('-r', 'dist/files/*', 'public')
+sh.cp('-r', 'assets/*', 'public')
+sh.rm('-rf', 'dist')

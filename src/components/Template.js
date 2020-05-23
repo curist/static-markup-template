@@ -32,6 +32,9 @@ const Template = ({ title = '', children }) => ['html', [
   ['body', {class: body}, [
     Nav,
     ...children,
+    ['div', [
+      ['img', { src: '/neocities.png' }],
+    ]],
   ]],
 ]]
 
