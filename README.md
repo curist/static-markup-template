@@ -10,7 +10,7 @@ JS libraries should be exported in `src/browser.js`, and can be accessed as `lib
 
 # The markup
 
-Markups are in the form of either one of the expression below
+Markups are in the form of either one of the expressions below
 ```js
 [ tagName ]
 [ tagName, attrs ]
@@ -22,3 +22,4 @@ Markups are in the form of either one of the expression below
 `attrs` is an object.
 
 `children` should be an array, containing zero or more`markup`s. 
+
