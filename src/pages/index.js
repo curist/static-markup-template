@@ -6,6 +6,14 @@ const App = [Template, [
   ['h1', 'Hello world!'],
   MyForm,
   [MyComponent, { count: 10 }],
+  ['div', {
+    onload: function(e, el) {
+      setTimeout(function() {
+        const { now } = libs
+        el.innerHTML = now()
+      }, 2000)
+    },
+  }, 'some content...'],
   'kk',
   MyComponent,
   ['script', `

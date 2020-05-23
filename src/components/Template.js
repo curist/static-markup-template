@@ -1,3 +1,9 @@
+import { css } from 'linaria'
+
+const body = css`
+  text-transform: uppercase;
+`
+
 const Nav = ['nav', [
   ['a', { href: '/' }, 'home'],
   ['a', { href: '/mypage' }, 'a page'],
@@ -16,9 +22,14 @@ const Template = ({ title = '', children }) => ['html', [
       // href: 'https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css',
       // href: 'https://unpkg.com/mvp.css',
     }],
+    ['link', {
+      rel: 'stylesheet',
+      href: '/styles.css',
+    }],
+    ['script', { src: '/libs.js' }],
     ['title', title],
   ]],
-  ['body', [
+  ['body', {class: body}, [
     Nav,
     ...children,
   ]],

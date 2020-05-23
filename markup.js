@@ -140,5 +140,5 @@ function markup(tags, indent = 0, context = {}) {
   return result
 }
 
-export default markup
+module.exports = markup
 

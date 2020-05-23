@@ -1,1 +1,4 @@
+.linaria-cache
 public
+dist
+node_modules
