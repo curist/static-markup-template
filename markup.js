@@ -16,7 +16,7 @@ const selfClosingTag = new Set([
   'meta', 'param', 'source', 'track', 'wbr',
 ])
 
-const loadableTags = new Set([
+const loadableTag = new Set([
   'body', 'frame', 'iframe', 'img',
   'link', 'script', 'style',
 ])
@@ -63,7 +63,7 @@ function markup(tags, indent = 0, context = {}) {
       if(typeof v === 'boolean' && v) {
         return k
       }
-      if(k === 'onload' && !loadableTags.has(tag)) {
+      if(k === 'onload' && !loadableTag.has(tag)) {
         if(!selfClosingTag.has(tag)) {
           childrenArr.push(['style', { 'data-onload': v }])
         }
