@@ -1,11 +1,11 @@
-import Template from '../components/Template.js'
-import MyForm from '../components/MyForm.js'
-import MyComponent from '../components/MyComponent.js'
+import Template from '../components/Template'
+import MyForm from '../components/MyForm'
+import Counter from '../components/Counter'
 
 const App = [Template, [
   ['h1', 'Hello world!'],
   MyForm,
-  [MyComponent, { count: 10 }],
+  [Counter, { count: 10 }],
   ['div', {
     onload: function(e, el) {
       setTimeout(function() {
@@ -15,7 +15,7 @@ const App = [Template, [
     },
   }, 'some content...'],
   'kk',
-  MyComponent,
+  Counter,
   ['script', `
     console.log('yoyo!!')
   `],

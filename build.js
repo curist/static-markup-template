@@ -2,6 +2,7 @@ const sh = require('shelljs')
 const fs = require('fs')
 const markup = require('./markup.js')
 
+sh.rm('-rf', 'public')
 sh.mkdir('-p', 'public')
 
 const pages = fs.readdirSync('./dist/pages').filter(f => /\.js$/.test(f))

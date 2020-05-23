@@ -1,5 +1,4 @@
-const MyComponent = ({ count = 0 }) => ['button', {
-  class: 'my-component',
+const Counter = ({ count = 0 }) => ['button', {
   'data-value': count,
   onclick: function(e, el) {
     const count = (parseInt(el.dataset.value) || 0) + 1
@@ -8,4 +7,4 @@ const MyComponent = ({ count = 0 }) => ['button', {
   },
 }, 'The count is: ' + count]
 
-export default MyComponent
+export default Counter

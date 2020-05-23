@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "build": "webpack && node build.js"
+    "prebuild": "webpack",
+    "build": "node build.js",
+    "postbuild": "serve public"
   },
   "devDependencies": {
     "babel-loader": "^8.1.0",
@@ -8,6 +10,7 @@
     "glob": "^7.1.6",
     "linaria": "^1.3.3",
     "mini-css-extract-plugin": "^0.9.0",
+    "serve": "^11.3.1",
     "shelljs": "^0.8.4",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"

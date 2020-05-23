@@ -1,4 +1,4 @@
-import Template from '../components/Template.js'
+import Template from '../components/Template'
 
 export default () => [Template, [
   ['h1', 'My Second Page'],
