@@ -7,7 +7,7 @@ const App = [Template, [
   MyForm,
   [Counter, { count: 10 }],
   ['div', {
-    onload: function(e, el) {
+    onload: <Handler>function(e, el) {
       setTimeout(function() {
         const { now } = libs
         el.innerHTML = now()
