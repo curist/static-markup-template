@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const builderConfig = {
   mode: 'development',
-  entry: glob.sync('./src/pages/*.js').reduce((acc, path) => {
+  entry: glob.sync('./src/pages/**/*.js').reduce((acc, path) => {
     const entry = path.replace('./src/pages/', '').replace('.js', '')
     acc[entry] = path
     return acc
