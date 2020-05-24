@@ -2,7 +2,7 @@ const sh = require('shelljs')
 const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
-const markup = require('./markup.js')
+const markup = require('./markup').default
 
 sh.rm('-rf', 'public')
 sh.mkdir('-p', 'public')

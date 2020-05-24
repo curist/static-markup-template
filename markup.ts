@@ -21,6 +21,9 @@ const loadableTag = new Set([
   'link', 'script', 'style',
 ])
 
+type Context = {
+  fns?: Record<string, Function>
+}
 // usage:
 //   [tag]
 //   [tag, {}]
@@ -28,7 +31,7 @@ const loadableTag = new Set([
 //   [tag, []]
 //   [tag, {}, '']
 //   [tag, {}, []]
-function markup(tags, indent = 0, context = {}) {
+function markup(tags, indent = 0, context: Context = {}) {
   if(typeof tags === 'function') {
     return markup([tags], indent, context)
   }
@@ -140,5 +143,5 @@ function markup(tags, indent = 0, context = {}) {
   return result
 }
 
-module.exports = markup
+export default markup
 
