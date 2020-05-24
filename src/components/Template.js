@@ -1,6 +1,6 @@
 import Nav from './Nav'
 
-const Template = ({ title = '', children }) => ['html', [
+const Template = ({ title = 'a page', children }) => ['html', [
   ['head', [
     ['link', {
       rel: 'icon',

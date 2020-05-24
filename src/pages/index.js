@@ -1,6 +1,6 @@
-import Template from '../components/Template'
-import MyForm from '../components/MyForm'
-import Counter from '../components/Counter'
+import Template from 'src/components/Template'
+import MyForm from 'src/components/MyForm'
+import Counter from 'src/components/Counter'
 
 const App = [Template, [
   ['h1', 'Hello world!'],

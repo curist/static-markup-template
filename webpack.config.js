@@ -14,6 +14,11 @@ const builderConfig = {
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'commonjs',
   },
+  resolve: {
+    alias: {
+      src: path.join(__dirname, 'src'),
+    },
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'files/styles.css',
